@@ -1,0 +1,7 @@
+config BR2_PACKAGE_EMACS
+	bool "emacs"
+	select BR2_PACKAGE_NCURSES
+	help
+	  The Emacs Operating System.
+
+	  http://mirror.us-midwest-1.nexcess.net/gnu/emacs/

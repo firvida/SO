@@ -1,0 +1,35 @@
+config BR2_PACKAGE_I3WM
+	bool "i3wm"
+	depends on BR2_PACKAGE_XORG7
+	depends on BR2_TOOLCHAIN_HAS_THREADS # glib2
+	depends on BR2_USE_MMU # glib2
+	depends on BR2_USE_WCHAR # glib2
+        depends on BR2_PACKAGE_LIBEV
+	depends on BR2_TOOLCHAIN_HAS_SYNC_4 # pango -> harfbuzz
+	depends on BR2_TOOLCHAIN_GCC_AT_LEAST_4_8 # pango -> harfbuzz
+	depends on BR2_INSTALL_LIBSTDCPP # pango -> freetype
+        depends on BR2_PACKAGE_STARTUP_NOTIFICATION
+	depends on BR2_PACKAGE_YAJL
+	select BR2_PACKAGE_XCB_UTIL
+	select BR2_PACKAGE_XCB_UTIL_CURSOR
+	select BR2_PACKAGE_XCB_UTIL_KEYSYMS
+	select BR2_PACKAGE_XCB_UTIL_WM
+	select BR2_PACKAGE_XCB_UTIL_XRM
+	select BR2_PACKAGE_LIBGLIB2
+	select BR2_PACKAGE_LIBXML2
+	select BR2_PACKAGE_PANGO
+	# libxft and libxrender are needed to get xft support in pango
+	select BR2_PACKAGE_XLIB_LIBXFT
+	select BR2_PACKAGE_XLIB_LIBXRENDER
+	help
+	  Tiling window manager with extensive standards support.
+
+	  http://i3wm.org
+
+comment "i3wm needs a toolchain w/ C++, threads, wchar, gcc >= 4.8"
+	depends on BR2_USE_MMU
+	depends on BR2_TOOLCHAIN_HAS_SYNC_4
+	depends on !BR2_TOOLCHAIN_HAS_THREADS || !BR2_USE_WCHAR || \
+		!BR2_TOOLCHAIN_GCC_AT_LEAST_4_8 || \
+		!BR2_INSTALL_LIBSTDCPP
+	depends on BR2_PACKAGE_XORG7
